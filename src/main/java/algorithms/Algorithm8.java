@@ -16,6 +16,7 @@ public class Algorithm8 {
 
   public Integer B(Integer m, Integer i) {
 
+    System.out.println(String.format("i: %s, m: %s", i, m));
     Integer B;
     if ((m % 2 == 0) && (m > 2)) {
       if (i < m - 1) {

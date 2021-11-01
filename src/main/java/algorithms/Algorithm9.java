@@ -90,31 +90,29 @@ public class Algorithm9 {
       P.add(i);
     }
     Integer j = 1;
-    Integer i = 1;
     Integer left;
     Integer right;
-    while (j < n) {
+    for(int i = 1; i < n; i++){
       results.add(P.stream().skip(1).collect(Collectors.toList()));
       left = P.get(n - 1);
       right = P.get(n);
       P.set(n - 1, right);
       P.set(n, left);
-      j++;
-      while (i > 1) {
+      while (j > 1) {
         results.add(P.stream().skip(1).collect(Collectors.toList()));
-        left = P.get(i);
-        right = P.get(i - 1);
-        P.set(i, right);
-        P.set(i - 1, left);
-        i--;
+        left = P.get(j);
+        right = P.get(j - 1);
+        P.set(j, right);
+        P.set(j - 1, left);
+        j--;
       }
-      while (i < n) {
+      while (j < n) {
         results.add(P.stream().skip(1).collect(Collectors.toList()));
-        left = P.get(i);
-        right = P.get(i + 1);
-        P.set(i, right);
-        P.set(i + 1, left);
-        i++;
+        left = P.get(j);
+        right = P.get(j + 1);
+        P.set(j, right);
+        P.set(j + 1, left);
+        j++;
       }
       results.add(P.stream().skip(1).collect(Collectors.toList()));
       left = P.get(1);
