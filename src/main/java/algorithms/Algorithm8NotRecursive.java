@@ -2,36 +2,44 @@ package algorithms;
 
 import com.google.common.collect.Lists;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.apache.commons.math3.util.CombinatoricsUtils;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 public class Algorithm8NotRecursive {
 
-  private List<Integer> P = Lists.newArrayList();
-  private Integer count = 0;
+  public void PERM(int m) {
 
-  public Algorithm8NotRecursive(List<Integer> p) {
-    P = p;
-  }
-
-  public Integer silnia(Integer n) {
-
-    Integer result = (n == 1 || n == 0) ? 1 : silnia(n - 1) * n;
-
-    return result;
-  }
-
-  public void swap(int i, int j) {
-
-    Integer left = this.P.get(i);
-    Integer right = this.P.get(j);
-    this.P.set(i, right);
-    this.P.set(j, left);
+    Integer counter = 0;
+    Integer x = 1;
+    List<Integer> C = Lists.newArrayList(Integer.MIN_VALUE);
+    List<Integer> P = Lists.newArrayList(Integer.MIN_VALUE);
+    for (int i = 1; i <= m; i++) {
+      C.add(1);
+      P.add(i);
+    }
+    while (counter < CombinatoricsUtils.factorial(m)) {
+      if (Objects.equals(C.get(x), x)) {
+        if (C.get(x) == 1 && x == 1) {
+          counter++;
+          System.out.println(P.stream().skip(1).collect(Collectors.toList()));
+        }
+        for (int i = 1; i <= x; i++) {
+          C.set(i, 1);
+        }
+        x++;
+      }
+      if (C.get(x) < x) {
+        Integer i = C.get(x);
+        this.swap(
+            this.B(x, i),
+            x,
+            P
+        );
+        C.set(x, C.get(x) + 1);
+        x = 1;
+      }
+    }
   }
 
   public Integer B(int m, int i) {
@@ -47,32 +55,12 @@ public class Algorithm8NotRecursive {
     }
   }
 
-  public void PERM(int m) {
+  public void swap(int i, int j, List<Integer> P) {
 
-    List<Integer> I = Lists.newArrayList(Integer.MIN_VALUE);
-    for (int i = 1; i <= m; i++) {
-      I.add(1);
-    }
-    Integer Mi = 1;
-    while (this.count < silnia(m)) {
-      if (I.get(Mi) == Mi) {
-        if (I.get(Mi) == 1 && Mi == 1) {
-          count++;
-          System.out.println(String.format("count: ", this.count));
-          System.out.println(P.stream().skip(1).collect(Collectors.toList()));
-        }
-        for (int i = 1; i <= Mi; i++) {
-          I.set(i, 1);
-        }
-        Mi++;
-      }
-      if (I.get(Mi) < Mi) {
-        Integer i = I.get(Mi);
-        this.swap(B(Mi, i), Mi);
-        I.set(Mi, I.get(Mi) + 1);
-        Mi = 1;
-      }
-    }
+    Integer left = P.get(i);
+    Integer right = P.get(j);
+    P.set(i, right);
+    P.set(j, left);
   }
 
 }

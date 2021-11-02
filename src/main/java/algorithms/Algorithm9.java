@@ -82,43 +82,43 @@ public class Algorithm9 {
     }
   }
 
-  public void runVersion3(Integer n) {
+  public void runVersion3(Integer m) {
 
     Set<List<Integer>> results = Sets.newLinkedHashSet();
     List<Integer> P = Lists.newArrayList(Integer.MIN_VALUE);
-    for (int i = 1; i <= n; i++) {
+    for (int i = 1; i <= m; i++) {
       P.add(i);
     }
-    Integer j = 1;
+    Integer counter = 1;
     Integer left;
     Integer right;
-    for(int i = 1; i < n; i++){
+    for (int i = 1; i < m; i++) {
       results.add(P.stream().skip(1).collect(Collectors.toList()));
-      left = P.get(n - 1);
-      right = P.get(n);
-      P.set(n - 1, right);
-      P.set(n, left);
-      while (j > 1) {
+      left = P.get(m - 1);
+      right = P.get(m);
+      P.set(m - 1, right);
+      P.set(m, left);
+      for (int k = counter; counter < m; k++) {
         results.add(P.stream().skip(1).collect(Collectors.toList()));
-        left = P.get(j);
-        right = P.get(j - 1);
-        P.set(j, right);
-        P.set(j - 1, left);
-        j--;
-      }
-      while (j < n) {
-        results.add(P.stream().skip(1).collect(Collectors.toList()));
-        left = P.get(j);
-        right = P.get(j + 1);
-        P.set(j, right);
-        P.set(j + 1, left);
-        j++;
+        left = P.get(k);
+        right = P.get(k + 1);
+        P.set(k, right);
+        P.set(k + 1, left);
+        counter++;
       }
       results.add(P.stream().skip(1).collect(Collectors.toList()));
       left = P.get(1);
       right = P.get(2);
       P.set(1, right);
       P.set(2, left);
+      for (int l = counter; counter > 1; l--) {
+        results.add(P.stream().skip(1).collect(Collectors.toList()));
+        left = P.get(l);
+        right = P.get(l - 1);
+        P.set(l, right);
+        P.set(l - 1, left);
+        counter--;
+      }
     }
     results.forEach(System.out::println);
   }
