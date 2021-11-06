@@ -89,35 +89,33 @@ public class Algorithm9 {
     for (int i = 1; i <= m; i++) {
       P.add(i);
     }
-    Integer counter = 1;
     Integer left;
     Integer right;
+    results.add(P.stream().skip(1).collect(Collectors.toList()));
     for (int i = 1; i < m; i++) {
-      results.add(P.stream().skip(1).collect(Collectors.toList()));
       left = P.get(m - 1);
       right = P.get(m);
       P.set(m - 1, right);
       P.set(m, left);
-      for (int k = counter; counter < m; k++) {
-        results.add(P.stream().skip(1).collect(Collectors.toList()));
+      results.add(P.stream().skip(1).collect(Collectors.toList()));
+      for (int k = 1; k < m; k++) {
         left = P.get(k);
         right = P.get(k + 1);
         P.set(k, right);
         P.set(k + 1, left);
-        counter++;
+        results.add(P.stream().skip(1).collect(Collectors.toList()));
       }
-      results.add(P.stream().skip(1).collect(Collectors.toList()));
       left = P.get(1);
       right = P.get(2);
       P.set(1, right);
       P.set(2, left);
-      for (int l = counter; counter > 1; l--) {
-        results.add(P.stream().skip(1).collect(Collectors.toList()));
+      results.add(P.stream().skip(1).collect(Collectors.toList()));
+      for (int l = m; l > 1; l--) {
         left = P.get(l);
         right = P.get(l - 1);
         P.set(l, right);
         P.set(l - 1, left);
-        counter--;
+        results.add(P.stream().skip(1).collect(Collectors.toList()));
       }
     }
     results.forEach(System.out::println);
