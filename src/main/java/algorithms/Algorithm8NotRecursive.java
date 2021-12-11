@@ -8,8 +8,9 @@ import org.apache.commons.math3.util.CombinatoricsUtils;
 
 public class Algorithm8NotRecursive {
 
-  public void PERM(int m) {
-
+  public void PERM(
+      int m
+  ) {
     Integer counter = 0;
     Integer x = 1;
     List<Integer> C = Lists.newArrayList(Integer.MIN_VALUE);
@@ -42,8 +43,10 @@ public class Algorithm8NotRecursive {
     }
   }
 
-  public Integer B(int m, int i) {
-
+  public Integer B(
+      int m,
+      int i
+  ) {
     if ((m % 2 == 0) && (m > 2)) {
       if (i < (m - 1)) {
         return i;
@@ -55,8 +58,11 @@ public class Algorithm8NotRecursive {
     }
   }
 
-  public void swap(int i, int j, List<Integer> P) {
-
+  public void swap(
+      int i,
+      int j,
+      List<Integer> P
+  ) {
     Integer left = P.get(i);
     Integer right = P.get(j);
     P.set(i, right);
