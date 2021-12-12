@@ -13,12 +13,11 @@ public class Task10 {
   private int boardSize = 4;
 
   void printSolution(
-      int board[][]
+      char board[][]
   ) {
     for (int i = 0; i < this.boardSize; i++) {
       for (int j = 0; j < this.boardSize; j++) {
-        System.out.print(" " + board[i][j]
-            + " ");
+        System.out.print(" " + board[i][j] + " ");
       }
       System.out.println();
     }
@@ -30,26 +29,26 @@ public class Task10 {
      placeed in columns from 0 to col -1. So we need
      to check only left side for attacking queens */
   boolean isSafe(
-      int board[][],
+      char board[][],
       int row,
       int col
   ) {
     int i, j;
     /* Check this row on left side */
     for (i = 0; i < col; i++) {
-      if (board[row][i] == 1) {
+      if (board[row][i] == 'H') {
         return false;
       }
     }
     /* Check upper diagonal on left side */
     for (i = row, j = col; i >= 0 && j >= 0; i--, j--) {
-      if (board[i][j] == 1) {
+      if (board[i][j] == 'H') {
         return false;
       }
     }
     /* Check lower diagonal on left side */
     for (i = row, j = col; j >= 0 && i < this.boardSize; i++, j--) {
-      if (board[i][j] == 1) {
+      if (board[i][j] == 'H') {
         return false;
       }
     }
@@ -59,7 +58,7 @@ public class Task10 {
   /* A recursive utility function to solve N
      Queen problem */
   boolean solveNQUtil(
-      int board[][],
+      char board[][],
       int col
   ) {
         /* base case: If all queens are placed
@@ -74,7 +73,7 @@ public class Task10 {
                board[i][col] */
       if (isSafe(board, i, col)) {
         /* Place this queen in board[i][col] */
-        board[i][col] = 1;
+        board[i][col] = 'H';
         /* recur to place rest of the queens */
         if (solveNQUtil(board, col + 1) == true) {
           return true;
@@ -82,7 +81,7 @@ public class Task10 {
                 /* If placing queen in board[i][col]
                    doesn't lead to a solution then
                    remove queen from board[i][col] */
-        board[i][col] = 0; // BACKTRACK
+        board[i][col] = 'x'; // BACKTRACK
       }
     }
         /* If the queen can not be placed in any row in
@@ -100,11 +99,11 @@ public class Task10 {
      feasible solutions.*/
   public boolean solveNQ(
   ) {
-    int board[][] = {
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0}
+    char board[][] = {
+        {'x', 'x', 'x', 'x'},
+        {'x', 'x', 'x', 'x'},
+        {'x', 'x', 'x', 'x'},
+        {'x', 'x', 'x', 'x'}
     };
     if (solveNQUtil(board, 0) == false) {
       System.out.print("Brak rozwiazania");
