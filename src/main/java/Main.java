@@ -1,5 +1,7 @@
 import com.google.common.collect.Lists;
+import dla_chetnych.Task10;
 import dla_chetnych.Task9;
+import dla_chetnych.Task9BruteForce;
 
 public class Main {
 
@@ -14,10 +16,15 @@ public class Main {
 //    new Algorithm8NotRecursive().PERM(3);
 //    new AlgorytmGrey().run();
 //    new Algorithm14().run(10);
-    Task9 task9 = new Task9(
-        Lists.newArrayList(1, 4, 12, 21),
-        5
-    );
+
+
+
+//    Task9 task9 = new Task9(
+//        Lists.newArrayList(1, 4, 12, 21),
+//        5
+//    );
+    Task10 task10 = new Task10();
+    task10.solveNQ();
   }
 
 }
