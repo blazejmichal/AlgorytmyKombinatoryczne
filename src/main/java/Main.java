@@ -15,8 +15,8 @@ public class Main {
 //    new AlgorytmGrey().run();
 //    new Algorithm14().run(10);
     Task9 task9 = new Task9(
-        Lists.newArrayList(1, 2),
-        3
+        Lists.newArrayList(1, 4, 12, 21),
+        5
     );
   }
 
