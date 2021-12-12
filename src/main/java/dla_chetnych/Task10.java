@@ -22,68 +22,65 @@ public class Task10 {
       Integer size
   ) {
     this.size = size;
+    // true jesli jest hetman
     boolean[] columns = new boolean[this.size];
+    // true jesli jest hetman
+    // indeks to kolumna + wiersz
     boolean[] leftDiagonal = new boolean[2 * this.size];
+    // true jesli jest hetman
+    // indeks to wiersz - kolumna + rozmiar tablicy
     boolean[] rightDiagonal = new boolean[2 * this.size];
     this.run();
   }
 
-  // Driver code
   public void run() {
-    this.resolveProblem();
+    List<Integer> initializedCombination = this.initializeCombination();
+    this.resolveProblem(this.results, 0, initializedCombination);
     this.printResults();
   }
 
-  public List<List<Integer>> resolveProblem(
+  public List<Integer> initializeCombination(
   ) {
-    // cols[i] = true if there is a queen previously placed at ith column
-//    this.columns = new boolean[this.size];
-    // leftDiagonal[i] = true if there is a queen previously placed at
-    // i = (row + col )th left diagonal
-//    this.leftDiagonal = new boolean[2 * this.size];
-    // rightDiagonal[i] = true if there is a queen previously placed at
-    // i = (row - col + n - 1)th rightDiagonal diagonal
-//    this.rightDiagonal = new boolean[2 * this.size];
-//    this.results = Lists.newArrayList();
-    List<Integer> temporary = Lists.newArrayList();
+    List<Integer> initializedCombination = Lists.newArrayList();
     for (int i = 0; i < this.size; i++) {
-      temporary.add(0);
+      initializedCombination.add(0);
     }
-    this.findSolution(this.results, 0, temporary);
-
-    return results;
+    return initializedCombination;
   }
 
-  public void findSolution(List<List<Integer>> result, int row, List<Integer> combination) {
-    if (row == this.size) {
-      // if row==n it means we have successfully placed all n queens.
-      // hence add current arrangement to our answer
-      // comb represent current combination
-      result.add(Lists.newArrayList(combination));
+  public void resolveProblem(
+      List<List<Integer>> argumentResults,
+      int rowIndex,
+      List<Integer> combination
+  ) {
+    // Gdy juz wszyscy hetmani sa rozlozeni na planszy
+    if (rowIndex == this.size) {
+      argumentResults.add(Lists.newArrayList(combination));
       return;
     }
     for (int col = 0; col < this.size; col++) {
-      // if we have a queen previously placed in the current column
-      // or in current left or right diagonal we continue
+      // Sytuacja gdy nie mozemy postawic hetmana, bo bilby sie z innym
       if (
           this.columns[col]
-              || this.leftDiagonal[row + col]
-              || this.rightDiagonal[row - col + this.size]
+              || this.leftDiagonal[rowIndex + col]
+              || this.rightDiagonal[rowIndex - col + this.size]
       ) {
         continue;
       }
-      // otherwise we place a queen at cell[row][col] and
-      //make current column, left diagonal and righ diagonal true
+      // sytuacja gdy stawiamy hetmana
+      // oznaczamy ze kolumna jest zajeta
       this.columns[col] = true;
-      this.leftDiagonal[row + col] = true;
-      this.rightDiagonal[row - col + this.size] = true;
-      combination.set(col, row + 1);
-      // then we goto next row
-      this.findSolution(result, row + 1, combination);
-      // then we backtrack and remove our currently placed queen
+      // oznaczamy ze przekatna jest zajeta
+      this.leftDiagonal[rowIndex + col] = true;
+      // oznaczamy ze przekatna jest zajeta
+      this.rightDiagonal[rowIndex - col + this.size] = true;
+      combination.set(col, rowIndex + 1);
+      // rozwiazujemy nastepny wiersz
+      this.resolveProblem(argumentResults, rowIndex + 1, combination);
+      // moze sie zdazyc ze continue przejdzie przez caly for i metoda powrotow sie uruchomi
       this.columns[col] = false;
-      this.leftDiagonal[row + col] = false;
-      this.rightDiagonal[row - col + this.size] = false;
+      this.leftDiagonal[rowIndex + col] = false;
+      this.rightDiagonal[rowIndex - col + this.size] = false;
     }
   }
 
