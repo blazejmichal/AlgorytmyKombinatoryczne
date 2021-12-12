@@ -24,7 +24,7 @@ public class Main {
 //        5
 //    );
     Task10 task10 = new Task10();
-    task10.solveNQ();
+    task10.run();
   }
 
 }
