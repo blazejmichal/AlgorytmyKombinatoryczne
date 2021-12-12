@@ -12,11 +12,21 @@ import lombok.Data;
 @Data
 public class Task10 {
 
-  private List<List<Integer>> results = Lists.newArrayList();
-  private boolean[] columns;
-  private boolean[] leftDiagonal;
-  private boolean[] rightDiagonal;
   private Integer size = 4;
+  private boolean[] columns = new boolean[this.size];
+  private boolean[] leftDiagonal = new boolean[2 * this.size];
+  private boolean[] rightDiagonal = new boolean[2 * this.size];
+  private List<List<Integer>> results = Lists.newArrayList();
+
+  public Task10(
+      Integer size
+  ) {
+    this.size = size;
+    boolean[] columns = new boolean[this.size];
+    boolean[] leftDiagonal = new boolean[2 * this.size];
+    boolean[] rightDiagonal = new boolean[2 * this.size];
+    this.run();
+  }
 
   // Driver code
   public void run() {
@@ -24,21 +34,17 @@ public class Task10 {
     this.printResults();
   }
 
-  /* This function solves the N Queen problem using
-  Backtracking. It mainly uses solveNQUtil() to
-  solve the problem.
-  */
   public List<List<Integer>> resolveProblem(
   ) {
     // cols[i] = true if there is a queen previously placed at ith column
-    this.columns = new boolean[this.size];
+//    this.columns = new boolean[this.size];
     // leftDiagonal[i] = true if there is a queen previously placed at
     // i = (row + col )th left diagonal
-    this.leftDiagonal = new boolean[2 * this.size];
+//    this.leftDiagonal = new boolean[2 * this.size];
     // rightDiagonal[i] = true if there is a queen previously placed at
     // i = (row - col + n - 1)th rightDiagonal diagonal
-    this.rightDiagonal = new boolean[2 * this.size];
-    this.results = Lists.newArrayList();
+//    this.rightDiagonal = new boolean[2 * this.size];
+//    this.results = Lists.newArrayList();
     List<Integer> temporary = Lists.newArrayList();
     for (int i = 0; i < this.size; i++) {
       temporary.add(0);

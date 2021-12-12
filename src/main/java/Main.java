@@ -23,8 +23,7 @@ public class Main {
 //        Lists.newArrayList(1, 4, 12, 21),
 //        5
 //    );
-    Task10 task10 = new Task10();
-    task10.run();
+    Task10 task10 = new Task10(4);
   }
 
 }
