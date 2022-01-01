@@ -17,25 +17,27 @@ public class Task12 {
   public void run(
       int n
   ) {
-    List<Integer> list = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
+    List<Integer> numbers = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
     for (int i = 2; i < n; i++) {
-      if (!hasPair(list, i + 1)) {
-        list.remove(list.indexOf(i + 1));
-      } else if (!hasOnlyOnePair(list, i + 1)) {
-        list.remove(list.indexOf(i + 1));
+      int item = i + 1;
+      if (
+          !hasPair(numbers, item)
+              || !hasOnlyOnePair(numbers, item)
+      ) {
+        numbers.remove(numbers.indexOf(item));
       }
     }
-    System.out.println(list);
+    System.out.println(numbers);
   }
 
   private boolean hasPair(
-      List<Integer> list,
-      int element
+      List<Integer> numbers,
+      int item
   ) {
-    int n = list.indexOf(element);
+    int n = numbers.indexOf(item);
     for (int i = 0; i < n; i++) {
       for (int j = (i + 1); j < n; j++) {
-        if (list.get(i) + list.get(j) == element) {
+        if (numbers.get(i) + numbers.get(j) == item) {
           return true;
         }
       }
@@ -44,13 +46,13 @@ public class Task12 {
   }
 
   private boolean hasOnlyOnePair(
-      List<Integer> list,
-      int element
+      List<Integer> numbers,
+      int item
   ) {
     int n = 0;
-    for (int i = 0; i < list.indexOf(element); i++) {
-      for (int j = (i + 1); j < list.indexOf(element); j++) {
-        if (list.get(i) + list.get(j) == element) {
+    for (int i = 0; i < numbers.indexOf(item); i++) {
+      for (int j = (i + 1); j < numbers.indexOf(item); j++) {
+        if (numbers.get(i) + numbers.get(j) == item) {
           n++;
         }
       }
