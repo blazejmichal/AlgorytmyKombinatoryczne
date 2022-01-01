@@ -14,44 +14,28 @@ import java.util.stream.IntStream;
  */
 public class Task12 {
 
-  private List<Integer> input;
-
-  public Task12(
+  public void run(
       int n
   ) {
-    this.buildInput(n);
-    this.run();
-  }
-
-  public void run(
-  ) {
-    for (int i = 2; i < this.input.size(); i++) {
-//      int element = this.input.get(i);
-      int element = i + 1;
-      if (
-          !hasPair(element)
-              || !onlyOnePair(element)
-      ) {
-        this.input.remove(
-            this.input.indexOf(element)
-        );
+    List<Integer> list = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
+    for (int i = 2; i < n; i++) {
+      if (!hasPair(list, i + 1)) {
+        list.remove(list.indexOf(i + 1));
+      } else if (!hasOnlyOnePair(list, i + 1)) {
+        list.remove(list.indexOf(i + 1));
       }
     }
+    System.out.println(list);
   }
 
-  public void buildInput(
-      int n
-  ) {
-    this.input = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
-  }
-
-  public Boolean hasPair(
+  private boolean hasPair(
+      List<Integer> list,
       int element
   ) {
-    int n = this.input.indexOf(element);
+    int n = list.indexOf(element);
     for (int i = 0; i < n; i++) {
       for (int j = (i + 1); j < n; j++) {
-        if (this.input.get(i) + this.input.get(j) == element) {
+        if (list.get(i) + list.get(j) == element) {
           return true;
         }
       }
@@ -59,13 +43,14 @@ public class Task12 {
     return false;
   }
 
-  public boolean onlyOnePair(
+  private boolean hasOnlyOnePair(
+      List<Integer> list,
       int element
   ) {
     int n = 0;
-    for (int i = 0; i < this.input.indexOf(element); i++) {
-      for (int j = (i + 1); j < this.input.indexOf(element); j++) {
-        if (this.input.get(i) + this.input.get(j) == element) {
+    for (int i = 0; i < list.indexOf(element); i++) {
+      for (int j = (i + 1); j < list.indexOf(element); j++) {
+        if (list.get(i) + list.get(j) == element) {
           n++;
         }
       }

@@ -19,7 +19,7 @@ public class Main {
 //        5
 //    );
 //    Task10 task10 = new Task10(6);
-    Task12 task12 = new Task12(18);
+    new Task12().run(18);
   }
 
 }
