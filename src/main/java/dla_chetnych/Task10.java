@@ -13,9 +13,9 @@ import lombok.Data;
 public class Task10 {
 
   private Integer size = 4;
-  private boolean[] columns = new boolean[this.size];
-  private boolean[] leftDiagonal = new boolean[2 * this.size];
-  private boolean[] rightDiagonal = new boolean[2 * this.size];
+  private boolean[] columns = new boolean[8 * this.size];
+  private boolean[] leftDiagonal = new boolean[200 * this.size];
+  private boolean[] rightDiagonal = new boolean[200 * this.size];
   private List<List<Integer>> results = Lists.newArrayList();
 
   public Task10(
@@ -59,7 +59,7 @@ public class Task10 {
       return;
     }
     for (int col = 0; col < this.size; col++) {
-      // Sytuacja gdy nie mozemy postawic hetmana, bo bilby sie z innym
+      // Sytuacja gdy nie mozemy postawic hetmana, bo bilby sie z innym'
       if (
           this.columns[col]
               || this.leftDiagonal[rowIndex + col]

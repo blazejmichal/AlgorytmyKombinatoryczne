@@ -1,12 +1,10 @@
-import com.google.common.collect.Lists;
-import dla_chetnych.Task10;
-import dla_chetnych.Task9;
-import dla_chetnych.Task9BruteForce;
+import dla_chetnych.Task12;
 
 public class Main {
 
-  public static void main(String[] args) {
-
+  public static void main(
+      String[] args
+  ) {
 //    List<List<Integer>> algorithm9Result = new Algorithm9().run(
 //        Lists.newArrayList(1, 2, 3)
 //    );
@@ -16,14 +14,12 @@ public class Main {
 //    new Algorithm8NotRecursive().PERM(3);
 //    new AlgorytmGrey().run();
 //    new Algorithm14().run(10);
-
-
-
 //    Task9 task9 = new Task9(
 //        Lists.newArrayList(1, 4, 12, 21),
 //        5
 //    );
-    Task10 task10 = new Task10(4);
+//    Task10 task10 = new Task10(6);
+    Task12 task12 = new Task12(18);
   }
 
 }
